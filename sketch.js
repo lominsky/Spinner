@@ -23,7 +23,6 @@ function setup() {
   button.position(25, 85);
   button.mousePressed(generate);
 
-  //spinnerAngle = random(0, 360);
   spinnerAngle = 0;
 
   noStroke();
@@ -36,8 +35,6 @@ function draw() {
     drawCircle();
     drawSpinner();
     fill(0);
-    // textAlign(LEFT);
-    // text(selected, 20, height-50);
   }
 
   if(mouseIsPressed && mouseX > width - 20) {
@@ -76,7 +73,7 @@ function drawCircle() {
   textAlign(CENTER);
   textSize(32);
   for(var i = 0; i < num; i++) {
-    var rad3 = radians((360*(i+1)/num + 360*i/num)/2);
+    var rad3 = radians((360*(i+1)/num + 360*i/num)/2 + 3);
     push();
     var transX = width/2 + (radius*2/3) * cos(rad3);
     var transY = height/2 + (radius*2/3) * sin(rad3);
@@ -111,7 +108,7 @@ function drawSpinner() {
       if(spinnerSpeed == 0) {
         hasSpun = true;
         selected = -1;
-        spinnerSpeed = floor(random(10, 16));
+        spinnerSpeed = 20;
       }
     }
   } else {
@@ -128,7 +125,6 @@ function drawSpinner() {
     var angle = spinnerAngle%360;
     var index = floor(angle/segmentSize);
     selected = index;
-    //console.log(floor((spinnerAngle+90)%360/names.length)); 
   }
 }
 
