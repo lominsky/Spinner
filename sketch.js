@@ -16,7 +16,7 @@ function setup() {
   label = createP('Enter Names:');
   label.position(25, 25);
 
-  input = createInput('Aly, Nate, Max, Alex, Cameron, Chan, Andrew, Noah, Gabe, Eon, Mikayla, Sam, Dylan, Cal, Diana, Ben, Kat');
+  input = createInput('');
   input.position(25, 60);
 
   button = createButton('Generate');
