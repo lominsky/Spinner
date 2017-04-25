@@ -38,7 +38,7 @@ function generate() {
   var n = input.value().split(", ");
   if(n.length > 2) {
     if(n.length%2 == 1) {
-      n.push("Everyone");
+      n.push("Spin Again");
     }
     names = n;
     isGenerated = true;
