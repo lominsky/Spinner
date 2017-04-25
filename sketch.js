@@ -36,14 +36,16 @@ function draw() {
     drawSpinner();
     fill(0);
   }
-
-  if(mouseIsPressed && mouseX > width - 20) {
-    spinnerAngle++;
-  }
 }
 
 function generate() {
-  var n = input.value().split(", ");
+  var n = input.value().split(",");
+  for(var i = 0; i < n.length; i++) {
+    if(n[i].charAt(0) == ' ')
+      n[i] = n[i].slice(1);
+    if(n[i].charAt(n[i].length-1) == ' ')
+      n[i] = n[i].slice(0, -1);
+  }
   if(n.length > 2) {
     if(n.length%2 == 1) {
       n.push("Spin Again");
