@@ -13,7 +13,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   radius = height/2 - 20;
 
-  label = createP('Enter Names:');
+  label = createP('Enter Values:');
   label.position(25, 25);
 
   input = createInput('');
@@ -35,6 +35,13 @@ function draw() {
     drawCircle();
     drawSpinner();
     fill(0);
+  } else {
+    background(255);
+    textAlign(CENTER);
+    textSize(48);
+    text("Enter the values for the spinner and click generate.", width/2, height/2 - height/10);
+    text("Click on the wheel to start the spin.", width/2, height/2);
+    text("Press space to remove a selected value.", width/2, height/2 + height/10);
   }
 }
 
