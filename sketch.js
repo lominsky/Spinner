@@ -6,6 +6,8 @@ var names;
 var isGenerated = false;
 var spinnerAngle;
 var spinnerSpeed = 0;
+var selected = "";
+var hasSpun = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -14,16 +16,18 @@ function setup() {
   label = createP('Enter Names:');
   label.position(25, 25);
 
-  input = createInput('');
+  input = createInput('Aly, Nate, Max, Alex, Cameron, Chan, Andrew, Noah, Gabe, Eon, Mikayla, Sam, Dylan, Cal, Diana, Ben, Kat');
   input.position(25, 60);
 
   button = createButton('Generate');
   button.position(25, 85);
   button.mousePressed(generate);
 
-  spinnerAngle = random(0, 360);
+  //spinnerAngle = random(0, 360);
+  spinnerAngle = 0;
 
   noStroke();
+  generate();
 }
 
 function draw() {
@@ -31,6 +35,13 @@ function draw() {
     background(255);
     drawCircle();
     drawSpinner();
+    fill(0);
+    // textAlign(LEFT);
+    // text(selected, 20, height-50);
+  }
+
+  if(mouseIsPressed && mouseX > width - 20) {
+    spinnerAngle++;
   }
 }
 
@@ -71,7 +82,10 @@ function drawCircle() {
     var transY = height/2 + (radius*2/3) * sin(rad3);
     translate(transX, transY);
     rotate(rad3);
-    fill(255);
+    if(i == selected && hasSpun)
+      fill(0, 255, 0);
+    else
+      fill(255);
     text(names[i], 0,  0);
     pop();
   }
@@ -83,24 +97,52 @@ function drawSpinner() {
   translate(width/2, height/2);
   rotate(radians(spinnerAngle));
   beginShape();
-  vertex(15, -25);
-  vertex(-15, -25);
-  vertex(0, 200);
-  vertex(0, 200);
+  vertex(-25, -15);
+  vertex(-25, 15);
+  vertex(200, 0);
+  vertex(200, 0);
   endShape(CLOSE);
   fill(100);
   ellipse(0, 0, radius/25, radius/25);
   pop();
   var distance = sqrt(sq(mouseX - width/2) + sq(mouseY - height/2))
   if(mouseIsPressed && distance < radius) {
-    if(isGenerated)
-      if(spinnerSpeed == 0)
+    if(isGenerated) {
+      if(spinnerSpeed == 0) {
+        hasSpun = true;
+        selected = -1;
         spinnerSpeed = floor(random(10, 16));
+      }
+    }
   } else {
     if(spinnerSpeed > 0)
-      spinnerSpeed -= .05;
+      spinnerSpeed -= .1;
     else
       spinnerSpeed = 0;
   }
-  spinnerAngle += spinnerSpeed; 
+  spinnerAngle += spinnerSpeed;
+  spinnerAngle = spinnerAngle%360
+  if(spinnerSpeed == 0) {
+    var num = names.length;
+    var segmentSize = 360/num;
+    var angle = spinnerAngle%360;
+    var index = floor(angle/segmentSize);
+    selected = index;
+    //console.log(floor((spinnerAngle+90)%360/names.length)); 
+  }
+}
+
+function keyPressed() {
+  if(key == ' ' && selected != -1) {
+    names.splice(selected, 1);
+
+    if(names[names.length-1] == "Spin Again") {
+      names.splice(names.length-1, 1);
+    } else {
+      names.push("Spin Again");
+    }
+
+    selected = -1;
+    hasSpun = false;
+  }
 }
