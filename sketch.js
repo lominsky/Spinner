@@ -38,10 +38,10 @@ function draw() {
   } else {
     background(255);
     textAlign(CENTER);
-    textSize(48);
+    textSize(floor(width/27));
     text("Enter the values for the spinner and click generate.", width/2, height/2 - height/10);
     text("Click on the wheel to start the spin.", width/2, height/2);
-    text("Press space to remove a selected value.", width/2, height/2 + height/10);
+    text("Press space to remove the selected value.", width/2, height/2 + height/10);
   }
 }
 
@@ -103,10 +103,10 @@ function drawSpinner() {
   translate(width/2, height/2);
   rotate(radians(spinnerAngle));
   beginShape();
-  vertex(-25, -15);
-  vertex(-25, 15);
-  vertex(200, 0);
-  vertex(200, 0);
+  vertex(-1 * radius / 12.7, -1 * radius / 21);
+  vertex(-1 * radius / 12.7, radius / 21);
+  vertex(radius / 1.5875, 0);
+  vertex(radius / 1.5875, 0);
   endShape(CLOSE);
   fill(100);
   ellipse(0, 0, radius/25, radius/25);
@@ -150,4 +150,9 @@ function keyPressed() {
     selected = -1;
     hasSpun = false;
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  radius = height/2 - 20;
 }
