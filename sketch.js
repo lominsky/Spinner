@@ -129,7 +129,7 @@ function drawSpinner() {
 }
 
 function keyPressed() {
-  if(key == ' ' && selected != -1) {
+  if(key == ' ' && selected != -1 && names.length > 2) {
     names.splice(selected, 1);
 
     if(names[names.length-1] == "Spin Again") {
