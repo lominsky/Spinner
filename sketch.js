@@ -2,7 +2,7 @@ var button;
 var input;
 var radius;
 var label;
-var names;
+var names = [];
 var isGenerated = false;
 var spinnerAngle;
 var spinnerSpeed = 0;
